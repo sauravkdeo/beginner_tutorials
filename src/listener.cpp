@@ -51,7 +51,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg) {
  * @brief main function for listener node
  * @param argc
  * @param argv
- *
+ * @return int
  */
 int main(int argc, char **argv) {
   /**
