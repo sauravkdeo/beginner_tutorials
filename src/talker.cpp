@@ -41,7 +41,12 @@
 
 
 /**
- * This tutorial demonstrates simple sending of messages over the ROS system.
+ *
+ * @brief This tutorial demonstrates simple sending of messages over the ROS system.
+ * @param argc
+ * @param argv
+ * @return int
+ *
  */
 int main(int argc, char **argv) {
   /**
