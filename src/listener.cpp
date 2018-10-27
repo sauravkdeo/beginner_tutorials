@@ -38,12 +38,21 @@
 #include "std_msgs/String.h"
 
 /**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
- */
+
+*@brief This tutorial demonstrates simple receipt of messages over the ROS system.
+*@param std_msgs::String::ConstPtr& msg
+*@return void
+*/
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("I heard: [%s]", msg->data.c_str());
 }
 
+/**
+ * @brief main function for listener node
+ * @param argc
+ * @param argv
+ *
+ */
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
