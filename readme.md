@@ -3,9 +3,14 @@
 
 ## Overview
 
-The beginner_tutorials project builds a simple publisher and subscriber node.
+This repository contains a simple publisher and subscriber node.
 
-The tutorials were followed from: http://wiki.ros.org/ROS/Tutorials.
+The tutorials were followed from:[website](http://wiki.ros.org/ROS/Tutorials).
+
+A launch file ```beginner_tutorials_10.launch``` can be used to launch talker and listener nodes concurrently.
+
+
+A service message named ```TalkerService.srv``` is used to change the output string upon the request from the client
 
 
 <p align="center">
@@ -58,6 +63,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ## Assumptions
 - ROS Kinetic is installed properly.
 - ROS environment is properly configured.
+- Dependencies are met
 
 
 ## Dependencies
@@ -73,12 +79,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 cd <path to workspace>
 mkdir src
 cd src
-git clone --recursive https://github.com/sauravkdeo/beginner_tutorials.git
+git clone -b Week10_HW --single-branch https://github.com/sauravkdeo/beginner_tutorials.git
 cd ..
 catkin_make
 ```
-
 ## Steps to run the package
+
+### Sourcing to .bashrc
+- open the .bashrc file located in the home folder using your favorite editor.Add the undermentioned lines at the end of the file and then save it.
+- This step is done to avoid sourcing  ~/```path to workspace```/devel/setup.bash every time.
+```
+source ~/<path to workspace>/devel/setup.bash
+ex:
+source ~/catkin_ws/devel/setup.bash
+```
+
+
+### Using rosrun
 
 ######  Open three terminals concurrently :
 
@@ -89,14 +106,34 @@ roscore
 
 - Run following commands to execute talker node in Terminal 2 :
 ```
-cd <path to workspace>
-source devel/setup.bash
 rosrun beginner_tutorials talker
 ```
 
 - Run following commands to execute listener node in Terminal 3 :
 ```
-cd <path to workspace>
-source devel/setup.bash
 rosrun beginner_tutorials listener
+```
+
+### Using roslaunch
+
+- To use the launch file type the undermentioned command in the terminal :
+```
+roslaunch beginner_tutorials_10.launch
+```
+User can also change the frequency at which the loop operates using undermentioned command :
+```
+roslaunch beginner_tutorials_10.launch frequency:=<desired frequency>
+ex:
+roslaunch beginner_tutorials_10.launch frequency:=10
+```
+
+
+
+### Service
+
+- User can also change the output string message by typing the following command in a new terminal
+```
+rosservice call /TextService "<text to be entered by the user>"
+ex:
+rosservice call /TextService "Hello ROS!!!"
 ```
