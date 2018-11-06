@@ -1,3 +1,10 @@
+Done processing ./include/talker.h
+Done processing ./include/listener.h
+./src/talker.cpp:48:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::TalkerService::Request &req  [runtime/references] [2]
+./src/talker.cpp:49:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::TalkerService::Response &resp  [runtime/references] [2]
 Done processing ./src/talker.cpp
 Done processing ./src/listener.cpp
+Done processing ./src/listenernode.cpp
+Done processing ./src/talkernode.cpp
+Total errors found: 2
 
