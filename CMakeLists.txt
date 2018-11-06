@@ -24,5 +24,3 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 
 add_dependencies(talker ${beginner_tutorials_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(talker TalkerService_msgs_generate_messages_cpp)
-add_dependencies(listener ${beginner_tutorials_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(listener TalkerService_msgs_generate_messages_cpp)
