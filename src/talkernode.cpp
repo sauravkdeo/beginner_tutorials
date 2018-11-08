@@ -71,7 +71,11 @@ int main(int argc, char **argv) {
    * object talker of class Talker is created
    */
   Talker talker;
+  if ((argv[1])) {
   talker.setFrequency(atof(argv[1]));
+  } else {
+    talker.setFrequency(5);
+  }
 
   /**
    * The advertise() function is how you tell ROS that you want to
