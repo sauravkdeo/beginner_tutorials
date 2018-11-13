@@ -34,6 +34,8 @@
  *OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include <tf/transform_broadcaster.h>
+#include <math.h>
 #include <sstream>
 #include <string>
 #include "ros/ros.h"
@@ -61,6 +63,13 @@ int main(int argc, char **argv) {
    */
   ros::init(argc, argv, "talker");
 
+static tf::TransformBroadcaster broadcast;
+tf::Transform transform;
+tf::Quaternion q;
+double r = 1.0;
+
+// Define the angular velocity
+double w = 2*M_PI;
   /**
    * NodeHandle is the main access point to communications with the ROS system.
    * The first NodeHandle constructed will fully initialize this node, and the last
@@ -103,6 +112,23 @@ int main(int argc, char **argv) {
 
 
     while (ros::ok()) {
+      double t = ros::Time::now().toSec();
+         // Get the coordinates of the Spiral
+         double x = r*cos(w*t);
+         double y = r*sin(w*t);
+         double z = 0;
+         double theta = w*t;
+
+         // Set the origin of the transform
+         transform.setOrigin(tf::Vector3(x, y, z));
+
+         // Set the orientation
+         q.setRPY(0, 0, theta);
+         transform.setRotation(q);
+
+         // Broadcast the transform
+         broadcast.sendTransform(tf::StampedTransform(transform,
+           ros::Time::now(), "world", "talk"));
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
