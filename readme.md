@@ -1,4 +1,5 @@
 # beginner_tutorials
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ---
 
 ## Overview
@@ -79,7 +80,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 cd <path to workspace>
 mkdir src
 cd src
-git clone -b Week10_HW --single-branch https://github.com/sauravkdeo/beginner_tutorials.git
+git clone -b Week11_HW --single-branch https://github.com/sauravkdeo/beginner_tutorials.git
 cd ..
 catkin_make
 ```
@@ -104,9 +105,9 @@ source ~/catkin_ws/devel/setup.bash
 roscore
 ```
 
-- Run following commands to execute talker node in Terminal 2 :
+- Run following commands to execute talker node in Terminal 2. A frequency value can be passed  :
 ```
-rosrun beginner_tutorials talker
+rosrun beginner_tutorials talker <frequency>
 ```
 
 - Run following commands to execute listener node in Terminal 3 :
@@ -136,4 +137,78 @@ roslaunch beginner_tutorials_10.launch frequency:=10
 rosservice call /TextService "<text to be entered by the user>"
 ex:
 rosservice call /TextService "Hello ROS!!!"
+```
+
+### Logging
+
+- Logger messages can seen once the talker and listener nodes are launched in the rqt_console GUI by running the following command.
+```
+rosrun rqt_console rqt_console
+```
+
+### Inspecting TF frames
+
+- The talker node broadcasts tf transforms to `\talk` relative to the `\world` frame. While roscore and talker are running we can use `tf_echo` to print the tf transforms.
+```
+rosrun tf tf_echo /world /talk
+```
+
+- A pdf connecting the reference frame to the other frame can be generated and viewed by running the following commands.
+The pdf will be generated at the location from where the command is run.
+```
+cd <path to repository>/results
+rosrun tf view_frames
+evince frames.pdf
+
+```
+
+### Visualizing TF frames
+- Relative motion of the moving frame with respect to world frame can be visualized using rviz GUI using undermentioned command.Ensure that ensure that the roscore and listener nodes are already running
+```
+rosrun rviz rviz
+```
+Change the value of the Fixed Frame in the GUI from ```map``` to ```world```
+click on the ```Add``` button and select ```TF```
+
+You will be able to see a frame moving is circular motion.
+### Running rostest
+
+- The unit tests have been written using gtest and rostest. The unit tests can be run by the following commands
+```
+cd <path to catkin workspace>
+catkin_make run_tests_beginner_tutorials
+```
+
+- You can test using:
+```
+rostest beginner_tutorials talkerTest.launch
+```
+
+### Recording bag files with the launch file
+
+- You must first build the project using catkin_make as described earlier. You may run the command below to launch the nodes and record all the topics. The bag file will be in the  directory once the recording is complete.To enable rosbag recording, the user has to explicitly mention ```record:=true``` , else rosbag recording will be disabled by default.
+```
+roslaunch beginner_tutorials beginner_tutorials_10.launch record:=true
+```
+
+### Inspecting the bag file
+
+- ```rqt_bag``` is a GUI tool to inspect,view and publish the bag files.
+```
+cd <path to repository>/results
+rqt_bag listener.bag
+```
+
+### Playing back the bag file with the Listener node demonstration
+
+- To replay the topic messages from the  bag file, ensure that the roscore and listener nodes are running. Then in a new terminal, enter the following command.
+```
+cd <path to repository>/results
+rosbag play listener.bag
+```
+
+### Disabling bag files with the launch file
+
+```
+roslaunch beginner_tutorials beginner_tutorials_10.launch
 ```
