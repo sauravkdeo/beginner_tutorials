@@ -6,5 +6,7 @@ Done processing ./src/talker.cpp
 Done processing ./src/listener.cpp
 Done processing ./src/listenernode.cpp
 Done processing ./src/talkernode.cpp
+Done processing ./test/main.cpp
+Done processing ./test/talkerTest.cpp
 Total errors found: 2
 
