@@ -47,8 +47,8 @@
 class Listener {
  public:
   /**
-   * @brief callback for any messages published on chatter.
-   * @param const std_msgs::String::ConstPtr&
+   * @brief callback for any messages published on chatter
+   * @param const std_msgs::String::ConstPtr& The msg
    * @return void
    */
   void chatterCallback(const std_msgs::String::ConstPtr&);

@@ -66,9 +66,9 @@ class Talker {
 
   /**
    * @brief method to handle changing the text to be sent on the chatter topic
-   * @param beginner_tutorials::TalkerService::Request &
-   * @param beginner_tutorials::TalkerService::Response &
-   * @return bool
+   * @param beginner_tutorials::TalkerService::Request & The request
+   * @param beginner_tutorials::TalkerService::Response & The response
+   * @return bool true for success value
    */
   bool callbackfunction(beginner_tutorials::TalkerService::Request &,
                    beginner_tutorials::TalkerService::Response &);
@@ -76,20 +76,20 @@ class Talker {
   /**
    * @brief Get the current text that is being sent over the chatter topic
    * @param void
-   * @return string
+   * @return string textvalue
    */
   std::string getText();
 
   /**
    * @brief get the value for the number of times message is published
    * @param void
-   * @return int
+   * @return int count
    */
   int getCount();
 
   /**
    * @brief set the value for the number of times message is published
-   * @param int
+   * @param int count
    * @return void
    */
   void setCount(int);
@@ -97,12 +97,12 @@ class Talker {
   /**
      * @brief get the frequncy of the message to be published
      * @param void
-     * @return double
+     * @return double frequency
      */
   double getFrequency();
   /**
      * @brief set the frequncy of the message to be published
-     * @param double
+     * @param double frequency
      * @return void
      */
   void setFrequency(double);
