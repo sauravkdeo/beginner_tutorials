@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 project(beginner_tutorials)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg message_generation)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg message_generation tf)
+
+##catkin_add_gtest(utest test/test_mynode.cpp)
+##add_rostest_gtest(tests_mynode test/mynode.test test/main.cpp test/test_mynode.cpp)
 
 ## Declare ROS messages and services
 add_service_files(FILES TalkerService.srv)
@@ -24,3 +27,28 @@ target_link_libraries(listener ${catkin_LIBRARIES})
 
 add_dependencies(talker ${beginner_tutorials_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(talker TalkerService_msgs_generate_messages_cpp)
+add_dependencies(talker beginner_tutorials_generate_messages_cpp)
+add_dependencies(listener beginner_tutorials_generate_messages_cpp)
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(
+  talkerTest
+  test/talkerTest.launch
+  test/main.cpp
+  test/talkerTest.cpp
+  )
+##catkin_add_gtest(talkerTest test/main.cpp
+##test/test_mynode.cpp)
+  target_link_libraries(
+  talkerTest
+  ${catkin_LIBRARIES}
+  )
+  add_dependencies(
+      talkerTest
+      talker
+      listener
+      ${catkin_EXPORTED_TARGETS}
+  )
+endif()
+
